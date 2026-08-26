@@ -3,6 +3,7 @@
 
 @import "tailwindcss" source(none);
 @import "phoenix-colocated/stlipsum/colocated.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,600;0,700&family=Roboto+Condensed:wght@700&family=Roboto+Mono:wght@300&display=swap');
 @source "../css";
 @source "../js";
 @source "../../lib/stlipsum_web";
@@ -103,3 +104,44 @@
 [data-phx-session], [data-phx-teleported-src] { display: contents }
 
 /* This file is for your main application CSS */
+
+/* STLipsum brand fonts */
+@theme {
+  --font-roboto: "Roboto", sans-serif;
+  --font-roboto-condensed: "Roboto Condensed", sans-serif;
+  --font-roboto-mono: "Roboto Mono", monospace;
+}
+
+/* STL Ipsum generator range sliders */
+.stl-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  outline: none;
+}
+.stl-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: #00ffcc;
+  cursor: pointer;
+  border: none;
+}
+.stl-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: #00ffcc;
+  cursor: pointer;
+  border: none;
+}
+.stl-slider::-moz-range-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
