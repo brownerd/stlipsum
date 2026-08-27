@@ -113,7 +113,7 @@
 }
 
 /* STL Ipsum generator range sliders */
-.stl-slider {
+.range-slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -122,25 +122,25 @@
   border-radius: 9999px;
   outline: none;
 }
-.stl-slider::-webkit-slider-thumb {
+.range-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 9999px;
-  background: #00ffcc;
+  background: var(--theme-colors-accent, #00ffcc);
   cursor: pointer;
   border: none;
 }
-.stl-slider::-moz-range-thumb {
+.range-slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 9999px;
-  background: #00ffcc;
+  background: var(--theme-colors-accent, #00ffcc);
   cursor: pointer;
   border: none;
 }
-.stl-slider::-moz-range-track {
+.range-slider::-moz-range-track {
   height: 2px;
   background: rgba(255, 255, 255, 0.25);
   border-radius: 9999px;

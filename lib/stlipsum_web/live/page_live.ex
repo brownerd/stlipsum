@@ -3,13 +3,52 @@ defmodule StlipsumWeb.PageLive do
 
   alias Stlipsum.Generator
 
-  @default_names 9
-  @default_sentences 5
+  @default_names 7
+  @default_sentences 4
   @default_paragraphs 1
 
   @max_names 15
   @max_sentences 10
   @max_paragraphs 5
+
+  @theme %{
+    "default" => %{
+      "primary" => "#333333",
+      "secondary" => "#ffffff",
+      "accent" => "#00ffcc",
+      "text" => "#333333"
+    },
+    "cardinals" => %{
+      "primary" => "#C41E3A",
+      "secondary" => "#0C2340",
+      "accent" => "#FEDB00",
+      "text" => "#ffffff"
+    },
+    "stlsc" => %{
+      "primary" => "#DD004A",
+      "secondary" => "#0C2340",
+      "accent" => "#ffffff",
+      "text" => "#ffffff"
+    },
+    "blues" => %{
+      "primary" => "#002F87",
+      "secondary" => "#041E42",
+      "accent" => "#FCB514",
+      "text" => "#ffffff"
+    },
+   "slu" => %{
+      "primary" => "#264396",
+      "secondary" => "#c9c9c7",
+      "accent" => "#ffffff",
+      "text" => "#264396"
+    },
+    "washu" => %{
+      "primary" => "#b12435",
+      "secondary" => "#ffffff",
+      "accent" => "#000000",
+      "text" => "#2a634a"
+    }
+  }
 
 
   def mount(_params, _session, socket) do
@@ -28,7 +67,8 @@ defmodule StlipsumWeb.PageLive do
         max_sentences: @max_sentences,
         max_paragraphs: @max_paragraphs,
         headings?: true,
-        theme: "stl"
+        theme: "default",
+        theme_colors: colors_for("default")
       )
       |> regenerate()
 
@@ -41,6 +81,8 @@ defmodule StlipsumWeb.PageLive do
       |> Map.get("categories", [])
       |> MapSet.new()
 
+    theme = Map.get(params, "theme", socket.assigns.theme)
+
     socket =
       socket
       |> assign(
@@ -48,7 +90,8 @@ defmodule StlipsumWeb.PageLive do
         sentences: int_param(params, "sentences", socket.assigns.sentences),
         paragraphs: int_param(params, "paragraphs", socket.assigns.paragraphs),
         headings?: Map.get(params, "headings", "on") == "on",
-        theme: Map.get(params, "theme", socket.assigns.theme),
+        theme: theme,
+        theme_colors: colors_for(theme),
         selected_categories: selected
       )
       |> regenerate()
@@ -75,4 +118,6 @@ defmodule StlipsumWeb.PageLive do
       :error -> default
     end
   end
+
+  defp colors_for(theme), do: Map.get(@theme, theme, @theme["default"])
 end

@@ -82,6 +82,8 @@ defmodule StlipsumWeb do
       # Core UI components
       import StlipsumWeb.CoreComponents
 
+      import StlipsumWeb.Logos
+
       # Common modules used in templates
       alias Phoenix.LiveView.JS
       alias StlipsumWeb.Layouts

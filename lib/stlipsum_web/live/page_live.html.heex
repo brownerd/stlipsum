@@ -1,52 +1,52 @@
 <Layouts.flash_group flash={@flash} />
-<div class="min-h-screen bg-[#1b1b1b] lg:p-6">
-  <div class="flex min-h-screen flex-col overflow-hidden bg-white shadow-[inset_0px_-15px_30px_-21px_rgba(0,0,0,0.25)] lg:min-h-[calc(100vh-3rem)] lg:flex-row lg:rounded-[2rem]">
+<div class="min-h-screen bg-[#333333] lg:p-6" style={"--theme-colors-primary: #{@theme_colors["primary"]}; --theme-colors-secondary: #{@theme_colors["secondary"]}; --theme-colors-accent: #{@theme_colors["accent"]}; --theme-colors-text: #{@theme_colors["text"]}"}>
+  <div class="flex min-h-screen flex-col overflow-hidden bg-white shadow-[inset_0px_-15px_30px_-21px_rgba(0,0,0,0.25)] lg:h-[calc(100vh-3rem)] lg:min-h-0 lg:flex-row lg:rounded-[2rem]">
     <!-- Sidebar: generator controls -->
-    <aside class="flex w-full flex-col gap-10 bg-[#363636] px-8 py-10 text-white lg:w-[25%] lg:min-w-[22rem] lg:py-12">
-        <h1 class="flex items-baseline">
-          <span class="font-roboto text-5xl font-semibold tracking-tight sm:text-6xl">STL</span>
-          <span class="font-roboto text-5xl font-light tracking-tight sm:text-6xl">IPSUM</span>
-        </h1>
+    <aside class="flex w-full flex-col gap-10 bg-[var(--theme-colors-primary)] px-8 py-10 text-white lg:w-[25%] lg:min-w-[22rem] lg:py-12">
+      <h1 class="flex items-baseline">
+        <span class="font-roboto text-5xl font-semibold tracking-tight sm:text-6xl">STL</span>
+        <span class="font-roboto text-5xl font-light tracking-tight sm:text-6xl">IPSUM</span>
+      </h1>
 
       <!-- <div class="flex items-baseline"> -->
       <!--   <span class="font-roboto text-4xl font-semibold tracking-tight">STL</span> -->
       <!--   <span class="font-roboto text-4xl font-light tracking-tight">IPSUM</span> -->
       <!-- </div> -->
 
-      <form phx-change="update" class="flex flex-1 flex-col gap-10">
+      <form phx-change="update" class="flex flex-1 flex-col justify-between">
         <div class="flex flex-col gap-7">
           <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between">
-              <span class="font-roboto text-2xl font-bold">Names</span>
+              <span class="font-roboto text-2xl font-bold">Names / Sentence</span>
               <span class="font-roboto text-2xl font-light">{@names}</span>
             </div>
-            <input type="range" name="names" min="5" max={@max_names} value={@names} class="stl-slider w-full" aria-label="Number of names" />
+            <input type="range" name="names" min="5" max={@max_names} value={@names} class="range-slider w-full" aria-label="Number of names" />
           </div>
 
           <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between">
-              <span class="font-roboto text-2xl font-bold">Sentences</span>
+              <span class="font-roboto text-2xl font-bold">Sentences / Paragraph</span>
               <span class="font-roboto text-2xl font-light">{@sentences}</span>
             </div>
-            <input type="range" name="sentences" min="1" max={@max_sentences} value={@sentences} class="stl-slider w-full" aria-label="Number of sentences" />
+            <input type="range" name="sentences" min="1" max={@max_sentences} value={@sentences} class="range-slider w-full" aria-label="Number of sentences" />
           </div>
 
           <div class="flex flex-col gap-2">
             <div class="flex items-center justify-between">
-              <span class="font-roboto text-2xl font-bold">Paragraphs</span>
+              <span class="font-roboto text-2xl font-bold">Paragraphs / Page</span>
               <span class="font-roboto text-2xl font-light">{@paragraphs}</span>
             </div>
-            <input type="range" name="paragraphs" min="1" max={@max_paragraphs} value={@paragraphs} class="stl-slider w-full" aria-label="Number of paragraphs" />
+            <input type="range" name="paragraphs" min="1" max={@max_paragraphs} value={@paragraphs} class="range-slider w-full" aria-label="Number of paragraphs" />
           </div>
         </div>
 
         <div class="flex flex-col gap-3">
           <span class="font-roboto text-2xl font-bold">Headings</span>
           <div class="inline-flex w-fit items-center gap-1 rounded-full bg-white/10 p-1">
-            <label class="cursor-pointer rounded-full px-4 py-1.5 font-roboto text-xl font-light text-white transition-colors has-checked:bg-[#00ffcc] has-checked:text-[#1b1b1b] has-checked:font-normal">
+            <label class="cursor-pointer rounded-full px-4 py-1.5 font-roboto text-xl font-light text-white transition-colors has-checked:bg-[var(--theme-colors-accent)] has-checked:text-[#333333] has-checked:font-normal">
               <input type="radio" name="headings" value="on" checked={@headings?} class="sr-only" /> On
             </label>
-            <label class="cursor-pointer rounded-full px-4 py-1.5 font-roboto text-xl font-light text-white transition-colors has-checked:bg-[#00ffcc] has-checked:text-[#1b1b1b] has-checked:font-normal">
+            <label class="cursor-pointer rounded-full px-4 py-1.5 font-roboto text-xl font-light text-white transition-colors has-checked:bg-[var(--theme-colors-accent)] has-checked:text-[#333333] has-checked:font-normal">
               <input type="radio" name="headings" value="off" checked={!@headings?} class="sr-only" /> Off
             </label>
           </div>
@@ -55,38 +55,41 @@
         <div class="flex flex-col gap-3">
           <span class="font-roboto text-2xl font-bold">Categories</span>
 
-          <div class="mt-1 grid grid-cols-3 gap-x-4 gap-y-3">
-            <label :for={{slug, label} <- @categories} class="inline-flex cursor-pointer items-center gap-2">
+          <div class="mt-1">
+            <label :for={{slug, label} <- @categories} class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-white/10 py-1 px-5 m-1 text-center">
               <input
                 type="checkbox"
                 name="categories[]"
                 value={slug}
                 checked={MapSet.member?(@selected_categories, slug)}
                 class="peer sr-only"
-              /> <span class="size-2.5 shrink-0 rounded-full bg-white/30 transition-colors peer-checked:bg-[#00ffcc]"></span>
-              <span class="font-roboto text-lg font-light text-white">{label}</span>
+              /> 
+              <!-- <span class="size-2.5 shrink-0 rounded-full bg-white/30 transition-colors peer-checked:bg-[var(--theme-colors-accent)]"></span> -->
+              <span class="font-roboto text-lg font-light peer-checked:text-[var(--theme-colors-accent)] line-through peer-checked:no-underline">{label}</span>
             </label>
           </div>
         </div>
 
-        <div class="mt-auto flex flex-col gap-3">
+        <div class="flex flex-col gap-3">
           <span class="font-roboto text-2xl font-bold">Theme</span>
           <div class="flex flex-wrap items-center gap-3">
             <label
               :for={
-                {value, src, alt} <- [
-                  {"stlsc", ~p"/images/stlsc.svg", "STL Science Center"},
-                  {"blues", ~p"/images/blues.svg", "Blues"},
-                  {"stl", ~p"/images/stl.svg", "STL"},
-                  {"slu", ~p"/images/slu.svg", "Saint Louis University"},
-                  {"washu", ~p"/images/washu.svg", "Washington University"}
+                {value, alt} <- [
+                  {"cardinals", "Cardinals Logo"},
+                  {"stlsc", "STL Soccer Club Logo"},
+                  {"blues", "Blues Logo"},
+                  {"slu", "Saint Louis University Logo"},
+                  {"washu", "Washington University Logo"},
+                  {"default", "Default Setting Icon"}
                 ]
               }
               class="cursor-pointer"
             >
               <input type="radio" name="theme" value={value} checked={value == @theme} class="peer sr-only" />
-              <span class="flex size-12 items-center justify-center rounded-full bg-white/10 p-2.5 ring-2 ring-transparent transition-colors peer-checked:bg-[#00ffcc]/15 peer-checked:ring-[#00ffcc]">
-                <img src={src} alt={alt} class="h-full w-full object-contain" />
+              <span class="flex size-20 items-center justify-center rounded-full bg-white/10 p-2.5 ring-2 ring-transparent transition-colors peer-checked:bg-[var(--theme-colors-accent)]/15 peer-checked:ring-[var(--theme-colors-accent)]" alt={alt}>
+                {apply(StlipsumWeb.Logos, String.to_atom(value), [%{alt: alt, color: @theme_colors["accent"]}] )}
+                <!-- <img src={src} alt={alt} class="h-full w-full object-contain" /> -->
               </span>
             </label>
           </div>
@@ -95,9 +98,9 @@
     </aside>
 
     <!-- Main: generated ipsum output -->
-    <main class="flex w-full flex-1 flex-col gap-10 max-h-screen px-6 py-10 sm:px-10 lg:px-16 lg:py-14">
+    <main class="flex w-full flex-1 flex-col gap-10 min-h-0 overflow-y-auto px-6 py-10 sm:px-10 lg:px-16 lg:py-14 bg-[var(--theme-colors-secondary)]">
       <div class="flex flex-wrap items-baseline justify-between gap-4">
-        <!-- <h1 class="flex items-baseline text-[#363636]"> -->
+        <!-- <h1 class="flex items-baseline text-[#333333]"> -->
         <!--   <span class="font-roboto text-5xl font-semibold tracking-tight sm:text-6xl">STL</span> -->
         <!--   <span class="font-roboto text-5xl font-light tracking-tight sm:text-6xl">IPSUM</span> -->
         <!-- </h1> -->
@@ -105,18 +108,18 @@
         <button
           type="button"
           phx-click={JS.dispatch("stl:copy", to: "#ipsum-output")}
-          class="inline-flex items-center gap-2 font-roboto-mono text-lg font-light text-[#1b1b1b] transition-opacity hover:opacity-60"
+          class="inline-flex items-center gap-2 font-roboto-mono text-lg font-light text-[#333333] transition-opacity hover:opacity-60"
         >
           <.icon name="hero-clipboard-document" class="size-5" /> Copy to Clipboard
         </button>
       </div>
 
-      <div id="ipsum-output" class="flex flex-col gap-12 overflow-y-scroll">
+      <div id="ipsum-output" class="flex flex-col gap-12 m-auto max-w-[70ch]">
         <article :for={{heading, paragraph} <- @entries} class="flex flex-col gap-3">
-          <h2 :if={heading} class="font-roboto-condensed text-3xl font-bold uppercase text-[#363636] sm:text-6xl">
+          <h2 :if={heading} class="font-roboto-condensed text-3xl font-bold uppercase text-[var(--theme-colors-text)] sm:text-6xl">
             {heading}
           </h2>
-          <p class="font-roboto text-2xl font-thin  leading-snug text-[#363636] sm:text-3xl">
+          <p class="font-roboto text-2xl font-thin  leading-snug text-[var(--theme-colors-text)] sm:text-3xl">
             {paragraph}
           </p>
         </article>
