@@ -20,8 +20,9 @@ defmodule StlipsumWeb.Router do
     live "/", PageLive
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", StlipsumWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", StlipsumWeb do
+    pipe_through :api
+
+    get "/generate", GeneratorController, :index
+  end
 end
